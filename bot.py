@@ -2,15 +2,14 @@ import discord
 import os
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix='$')
-client = discord.Client()
 
-@commands.command()
+client = discord.Client()
+bot = commands.Bot(command_prefix='!')
+
+@bot.command()
 async def test(ctx, arg):
     await ctx.send(arg)
-
-bot.add_command(test)
-
+    
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
@@ -23,4 +22,13 @@ async def on_message(message):
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
 
+@client.event
+async def on_member_join(member):
+    await member.create_dm()
+    await member.dm_channel.send(
+        f'Heyaa {member.name}, welcome!!!'
+    )
+
+
 client.run(os.environ['TOKEN'])
+bot.run(os.environ['TOKEN'])
