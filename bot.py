@@ -14,7 +14,13 @@ async def test(ctx, arg):
 async def info(ctx, arg):
     r = requests.get(f"https://api.github.com/users/{arg}")
     resp = r.json()
-    await ctx.send(resp['name'])
+    if r:
+        await ctx.send(resp['name'])
+    else:
+        await ctx.send("No such user found")
+
+    
+    
 
 bot.run(os.environ['TOKEN'])
 
