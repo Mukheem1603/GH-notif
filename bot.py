@@ -15,7 +15,8 @@ async def info(ctx, arg):
     r = requests.get(f"https://api.github.com/users/{arg}")
     resp = r.json()
     if r:
-        await ctx.send(resp['name'])
+        datatext = f"Name: {resp['name']}\nBio: {resp['bio']}\nPublic Repos: {resp['public_repos']}\nFollowers: {resp['followers']}\nFollowing: {resp['following']} "
+        await ctx.send(datatext)
     else:
         await ctx.send("No such user found")
 
