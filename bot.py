@@ -30,6 +30,6 @@ async def on_member_join(member):
     )
 
 
-client.run(os.environ['TOKEN'])
+
 
 bot.run(os.environ['TOKEN'])
