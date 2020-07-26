@@ -7,12 +7,12 @@ from discord.ext import commands
 bot = commands.Bot(command_prefix='$')
 
 @bot.command()
-async def test(ctx, arg):
+async def echo(ctx, arg):
     await ctx.send(arg)
 
 @bot.command()
-async def info(ctx, arg):
-    r = requests.get(f"https://api.github.com/users/{arg}")
+async def info(ctx, username):
+    r = requests.get(f"https://api.github.com/users/{username}")
     resp = r.json()
     if r:
         datatext = f"Name: {resp['name']}\nBio: {resp['bio']}\nPublic Repos: {resp['public_repos']}\nFollowers: {resp['followers']}\nFollowing: {resp['following']} "
