@@ -2,14 +2,9 @@ import discord
 import os
 from discord.ext import commands
 
-
-bot = commands.Bot(command_prefix='$')
-
-@bot.command()
-async def test(ctx, arg):
-    await ctx.send(arg)
-
 client = discord.Client()
+client = commands.Bot(command_prefix='$')
+
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
@@ -29,7 +24,9 @@ async def on_member_join(member):
         f'Heyaa {member.name}, welcome!!!'
     )
 
+@client.command()
+async def test(ctx, arg):
+    await ctx.send(arg)
 
 
-
-bot.run(os.environ['TOKEN'])
+client.run(os.environ['TOKEN'])
