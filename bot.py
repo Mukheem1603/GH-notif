@@ -1,8 +1,15 @@
 import discord
 import os
+from discord.ext import commands
 
+bot = commands.Bot(command_prefix='$')
 client = discord.Client()
 
+@commands.command()
+async def test(ctx, arg):
+    await ctx.send(arg)
+
+bot.add_command(test)
 
 @client.event
 async def on_ready():
