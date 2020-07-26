@@ -3,7 +3,7 @@ import os
 from discord.ext import commands
 
 client = discord.Client()
-client = commands.Bot(command_prefix='$')
+bot = commands.Bot(command_prefix='$')
 
 @client.event
 async def on_ready():
@@ -24,9 +24,10 @@ async def on_member_join(member):
         f'Heyaa {member.name}, welcome!!!'
     )
 
-@client.command()
+@commands.command()
 async def test(ctx, arg):
     await ctx.send(arg)
 
+bot.add_command(test)
 
 client.run(os.environ['TOKEN'])
