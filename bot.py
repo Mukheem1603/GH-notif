@@ -7,7 +7,7 @@ bot = commands.Bot(command_prefix='$')
 
 @bot.command()
 async def test(ctx, arg):
-    await ctx.send(arg)
+    await ctx.channel.send(arg)
 
 @client.event
 async def on_ready():
