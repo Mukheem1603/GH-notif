@@ -21,18 +21,18 @@ async def on_member_join(member):
     )
 
 @bot.command()
-async def echo(ctx, arg):
-    await ctx.send(arg)
+async def echo(arg):
+    await bot.say(arg)
 
 @bot.command()
-async def info(ctx, username):
+async def info(username):
     r = requests.get(f"https://api.github.com/users/{username}")
     resp = r.json()
     if r:
         datatext = f"Name: {resp['name']}\nBio: {resp['bio']}\nPublic Repos: {resp['public_repos']}\nFollowers: {resp['followers']}\nFollowing: {resp['following']} "
-        await ctx.send(datatext)
+        await bot.say(datatext)
     else:
-        await ctx.send("No such user found")
+        await bot.say("No such user found")
 
     
     
