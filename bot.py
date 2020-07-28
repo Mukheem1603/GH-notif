@@ -5,34 +5,34 @@ import asyncio
 from discord.ext import commands
 
 
-bot = commands.Bot(command_prefix='$')
-@bot.event
+client = commands.Bot(command_prefix='$')
+@client.event
 async def on_message(message):
-    if message.author == bot.user:
+    if message.author == client.user:
         return
     if message.content.startswith('help'):
         await message.channel.send(f'Heyaa {message.author.name} ❤\nYou can have a look at simple stats of your GitHub profile by a simple command ✨\nThe command: $info yourGitHubusername\n\nHave fun 😁')
 
-@bot.event
+@client.event
 async def on_member_join(member):
     await member.create_dm()
     await member.dm_channel.send(
         f'Heyaa {member.name} ❤\nWelcome to our channel 🎉🎊\n \nGreetings from my boss , Mukheem 👨‍💻\n You can have a look at simple stats of your GitHub profile by a simple command ✨\nThe command: $info yourGitHubusername\n\nHave fun 😁'
     )
 
-@bot.command()
-async def echo(arg):
-    await bot.say(arg)
+@client.command()
+async def echo(ctx,arg):
+    await ctx.send(arg)
 
-@bot.command()
-async def info(username):
+@client.command()
+async def info(ctx,username):
     r = requests.get(f"https://api.github.com/users/{username}")
     resp = r.json()
     if r:
         datatext = f"Name: {resp['name']}\nBio: {resp['bio']}\nPublic Repos: {resp['public_repos']}\nFollowers: {resp['followers']}\nFollowing: {resp['following']} "
-        await bot.say(datatext)
+        await ctx.send(datatext)
     else:
-        await bot.say("No such user found")
+        await ctx.send("No such user found")
 
     
     
