@@ -37,6 +37,6 @@ async def info(ctx,username):
     
     
 
-bot.run(os.environ['TOKEN'])
+client.run(os.environ['TOKEN'])
 
 
