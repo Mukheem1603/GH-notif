@@ -5,6 +5,15 @@ from discord.ext import commands
 
 
 bot = commands.Bot(command_prefix='$')
+@bot.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('hello'):
+        await message.channel.send(f'Hey {message.author.name}!!!')
+    if message.content.startswith('help'):
+        await message.channel.send(f'Heyaa {message.author.name} ❤\nYou can have a look at simple stats of your GitHub profile by a simple command ✨\nThe command: $info yourGitHubusername\n\nHave fun 😁')
 
 @bot.command()
 async def echo(ctx, arg):
