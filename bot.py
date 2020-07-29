@@ -64,6 +64,7 @@ async def followers():
                 else :
                     channel = client.get_channel(737208902961201174)
                     await channel.send("NADA")
+                    await followers()
 
 client.loop.create_task(followers())
 
