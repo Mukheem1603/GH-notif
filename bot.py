@@ -20,11 +20,11 @@ async def on_member_join(member):
         f'Heyaa {member.name} ❤\nWelcome to our channel 🎉🎊\n \nGreetings from my boss , Mukheem 👨‍💻\n You can have a look at simple stats of your GitHub profile by a simple command ✨\nThe command: $info yourGitHubusername\n\nHave fun 😁'
     )
 
-@client.command()
+@commands.command()
 async def echo(ctx,arg):
     await ctx.send(arg)
 
-@client.command()
+@commands.command()
 async def info(ctx,username):
     r = requests.get(f"https://api.github.com/users/{username}")
     resp = r.json()
@@ -34,8 +34,9 @@ async def info(ctx,username):
     else:
         await ctx.send("No such user found")
 
-    
-    
+
+client.add_command(echo)
+client.add_command(info)
 
 client.run(os.environ['TOKEN'])
 
