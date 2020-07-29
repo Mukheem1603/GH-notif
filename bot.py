@@ -50,22 +50,22 @@ async def followers():
             resp1 = await r1.json()
             oldcount = len(resp1)
             oldcount = int(oldcount)
-            await asyncio.sleep(5)
-            async with session.get(f"https://api.github.com/users/Mukheem1603/followers") as r2:
-                resp2 = await r2.json()
-                newcount = len(resp2)
-                newcount = int(newcount)
-                if newcount > oldcount :
-                    channel = client.get_channel(737208902961201174)
-                    await channel.send(f"Boss , your following count has been increased.\nOld followers count={oldcount}\nNew followers count={newcount}")
-                    await followers()
-                elif oldcount > newcount :
-                    channel = client.get_channel(737208902961201174)
-                    await channel.send(f"Boss , your following count has been decreased.\nOld followers count={oldcount}\nNew followers count={newcount}")
-                    await followers()
-                else :
-                    channel = client.get_channel(737208902961201174)
-                    await followers()
+        await asyncio.sleep(5)
+        async with session.get(f"https://api.github.com/users/Mukheem1603/followers") as r2:
+            resp2 = await r2.json()
+            newcount = len(resp2)
+            newcount = int(newcount)
+            if newcount > oldcount :
+                channel = client.get_channel(737208902961201174)
+                await channel.send(f"Boss , your following count has been increased.\nOld followers count={oldcount}\nNew followers count={newcount}")
+                await followers()
+            elif oldcount > newcount :
+                channel = client.get_channel(737208902961201174)
+                await channel.send(f"Boss , your following count has been decreased.\nOld followers count={oldcount}\nNew followers count={newcount}")
+                await followers()
+            else :
+                channel = client.get_channel(737208902961201174)
+                await followers()
 
 client.loop.create_task(followers())
 
