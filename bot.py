@@ -67,7 +67,9 @@ async def followers():
                     ofollower = resp1[oldcount-1]['login']
                     await channel.send(f"Boss , your following count has been decreased.\n{ofollower} unfollowed you.\nOld followers count={oldcount}\nNew followers count={newcount}")
                     await followers()
-    await asyncio.sleep(1)
+                else :
+                    await followers()
+    
     await followers()
     
 client.loop.create_task(followers())
