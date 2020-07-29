@@ -61,10 +61,12 @@ async def followers():
                     channel = client.get_channel(737208902961201174)
                     nfollower = resp2[newcount-1]['login']
                     await channel.send(f"Boss , your following count has been increased.\n{nfollower} started following you.\nOld followers count={oldcount}\nNew followers count={newcount}")
+                    await followers()
                 elif oldcount > newcount :
                     channel = client.get_channel(737208902961201174)
                     ofollower = resp1[oldcount-1]['login']
                     await channel.send(f"Boss , your following count has been decreased.\n{ofollower} unfollowed you.\nOld followers count={oldcount}\nNew followers count={newcount}")
+                    await followers()
     await asyncio.sleep(1)
     await followers()
     
