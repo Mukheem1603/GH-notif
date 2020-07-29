@@ -59,10 +59,12 @@ async def followers():
                 newcount = int(newcount)
                 if newcount > oldcount :
                     channel = client.get_channel(737208902961201174)
-                    await channel.send(f"Boss , your following count has been increased.\nOld followers count={oldcount}\nNew followers count={newcount}")
+                    nfollower = resp2[newcount-1]['login']
+                    await channel.send(f"Boss , your following count has been increased.\n{nfollower} started following you.\nOld followers count={oldcount}\nNew followers count={newcount}")
                 elif oldcount > newcount :
                     channel = client.get_channel(737208902961201174)
-                    await channel.send(f"Boss , your following count has been decreased.\nOld followers count={oldcount}\nNew followers count={newcount}")
+                    ofollower = resp1[oldcount-1]['login']
+                    await channel.send(f"Boss , your following count has been decreased.\n{ofollower} unfollowed you.\nOld followers count={oldcount}\nNew followers count={newcount}")
     await followers()
 
 client.loop.create_task(followers())
