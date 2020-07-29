@@ -51,7 +51,7 @@ async def followers():
                 resp1 = await r1.json()
                 oldcount = len(resp1)
                 oldcount = int(oldcount)
-        await asyncio.sleep(2)
+        await asyncio.sleep(1)
         async with session.get(f"https://api.github.com/users/Mukheem1603/followers") as r2:
             if r2.status == 200:
                 resp2 = await r2.json()
@@ -65,7 +65,7 @@ async def followers():
                     channel = client.get_channel(737208902961201174)
                     ofollower = resp1[oldcount-1]['login']
                     await channel.send(f"Boss , your following count has been decreased.\n{ofollower} unfollowed you.\nOld followers count={oldcount}\nNew followers count={newcount}")
-    await asyncio.sleep(4)
+    await asyncio.sleep(1)
     
 client.loop.create_task(followers())
 
