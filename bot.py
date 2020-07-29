@@ -67,6 +67,7 @@ async def followers():
                     await followers()
                 else:
                     await followers()
+    await followers()
 
 client.loop.create_task(followers())
 
