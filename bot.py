@@ -51,7 +51,7 @@ async def followers():
                 resp1 = await r1.json()
                 oldcount = len(resp1)
                 oldcount = int(oldcount)
-        await asyncio.sleep(1)
+        await asyncio.sleep(5)
         async with session.get(f"https://api.github.com/users/Mukheem1603/followers") as r2:
             if r2.status == 200:
                 resp2 = await r2.json()
