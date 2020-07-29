@@ -47,22 +47,24 @@ async def followers():
     await client.wait_until_ready()
     async with aiohttp.ClientSession() as session:
         async with session.get(f"https://api.github.com/users/Mukheem1603/followers") as r1:
-            resp1 = await r1.json()
-            oldcount = len(resp1)
-            oldcount = int(oldcount)
+            if r1.status == 200:
+                resp1 = await r1.json()
+                oldcount = len(resp1)
+                oldcount = int(oldcount)
         await asyncio.sleep(3)
         async with session.get(f"https://api.github.com/users/Mukheem1603/followers") as r2:
-            resp2 = await r2.json()
-            newcount = len(resp2)
-            newcount = int(newcount)
-            if newcount > oldcount :
-                channel = client.get_channel(737208902961201174)
-                await channel.send(f"Boss , your following count has been increased.\nOld followers count={oldcount}\nNew followers count={newcount}")
-            elif oldcount > newcount :
-                channel = client.get_channel(737208902961201174)
-                await channel.send(f"Boss , your following count has been decreased.\nOld followers count={oldcount}\nNew followers count={newcount}")
-            else :
-                channel = client.get_channel(737208902961201174)
+            if r2.status == 200:
+                resp2 = await r2.json()
+                newcount = len(resp2)
+                newcount = int(newcount)
+                if newcount > oldcount :
+                    channel = client.get_channel(737208902961201174)
+                    await channel.send(f"Boss , your following count has been increased.\nOld followers count={oldcount}\nNew followers count={newcount}")
+                elif oldcount > newcount :
+                    channel = client.get_channel(737208902961201174)
+                    await channel.send(f"Boss , your following count has been decreased.\nOld followers count={oldcount}\nNew followers count={newcount}")
+                else :
+                    channel = client.get_channel(737208902961201174)
     await followers()
 
 client.loop.create_task(followers())
