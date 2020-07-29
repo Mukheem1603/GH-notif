@@ -20,11 +20,11 @@ async def on_member_join(member):
         f'Heyaa {member.name} ❤\nWelcome to our channel 🎉🎊\n \nGreetings from my boss , Mukheem 👨‍💻\n You can have a look at simple stats of your GitHub profile by a simple command ✨\nThe command: $info yourGitHubusername\n\nHave fun 😁'
     )
 
-@commands.command()
+@client.command()
 async def echo(ctx,arg):
     await ctx.send(arg)
 
-@commands.command()
+@client.command()
 async def info(ctx,username):
     r = requests.get(f"https://api.github.com/users/{username}")
     resp = r.json()
