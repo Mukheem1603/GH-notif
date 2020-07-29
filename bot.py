@@ -3,6 +3,7 @@ import os
 import requests
 from discord.ext import commands
 import asyncio
+import aiohttp
 
 
 client = commands.Bot(command_prefix='$')
@@ -34,6 +35,19 @@ async def info(ctx,username):
         await ctx.send(datatext)
     else:
         await ctx.send("No such user found")
+
+@client.command()
+async def getinfo(ctx,username):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f"https://api.github.com/users/{username}") as r:
+            if r.status == 200:
+                resp = await r.json()
+                datatext = f"Name: {resp['name']}\nBio: {resp['bio']}\nPublic Repos: {resp['public_repos']}\nFollowers: {resp['followers']}\nFollowing: {resp['following']} "
+                await ctx.send(datatext)
+            else:
+                await ctx.send("No such user found")
+                
+
 
 
 client.run(os.environ['TOKEN'])
