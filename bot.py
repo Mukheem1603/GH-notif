@@ -46,21 +46,21 @@ async def info(ctx,username):
 async def followers():
     await client.wait_until_ready()
     async with aiohttp.ClientSession() as session:
-        async with session.get(f"https://api.github.com/users/Mukheem1603") as r1:
+        async with session.get(f"https://api.github.com/users/Mukheem1603/followers") as r1:
             resp1 = await r1.json()
-            oldcount = resp1['followers']
+            oldcount = len(resp1)
             oldcount = int(oldcount)
-        await asyncio.sleep(5)
-        async with session.get(f"https://api.github.com/users/Mukheem1603") as r2:
-            resp2 = await r2.json()
-            newcount = resp2['followers']
-            newcount = int(newcount)
-        if newcount > oldcount :
-            channel = client.get_channel(737208902961201174)
-            await channel.send(f"Boss , your following count has been increased.\nOld followers count={oldcount}\nNew followers count={newcount}")
-        elif oldcount > newcount :
-            channel = client.get_channel(737208902961201174)
-            await channel.send(f"Boss , your following count has been decreased.\nOld followers count={oldcount}\nNew followers count={newcount}")
+            await asyncio.sleep(5)
+            async with session.get(f"https://api.github.com/users/Mukheem1603/followers") as r2:
+                resp2 = await r2.json()
+                newcount = len(resp2)
+                newcount = int(newcount)
+                if newcount > oldcount :
+                    channel = client.get_channel(737208902961201174)
+                    await channel.send(f"Boss , your following count has been increased.\nOld followers count={oldcount}\nNew followers count={newcount}")
+                elif oldcount > newcount :
+                    channel = client.get_channel(737208902961201174)
+                    await channel.send(f"Boss , your following count has been decreased.\nOld followers count={oldcount}\nNew followers count={newcount}")
 
 client.loop.create_task(followers())
 
