@@ -61,6 +61,9 @@ async def followers():
                 elif oldcount > newcount :
                     channel = client.get_channel(737208902961201174)
                     await channel.send(f"Boss , your following count has been decreased.\nOld followers count={oldcount}\nNew followers count={newcount}")
+                else :
+                    channel = client.get_channel(737208902961201174)
+                    await channel.send("NADA")
 
 client.loop.create_task(followers())
 
