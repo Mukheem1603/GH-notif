@@ -35,9 +35,6 @@ async def info(ctx,username):
         await ctx.send("No such user found")
 
 
-client.add_command(echo)
-client.add_command(info)
-
 client.run(os.environ['TOKEN'])
 
 
