@@ -1,16 +1,24 @@
 import discord
 import os
 import requests
-from discord.ext import commands
+from discord.ext import commands,tasks
 import asyncio
 import aiohttp
+from itertools import cycle
 
 
 client = commands.Bot(command_prefix='$')
+status = cycle(['PUBG','VALORANT','MINECRAFT','PACMAN','FORTNITE'])
+
+@tasks.loop(seconds=10)
+async def change_status():
+    await client.change_presence(activity=discord.Game(next(status)))
+
+
 @client.event
 async def on_ready():
+    change_status.start()
     print('We have logged in as {0.user}'.format(client))
-    await client.change_presence(activity=discord.Game(name='PUBG'))
 
 @client.event
 async def on_message(message):
