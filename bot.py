@@ -14,6 +14,9 @@ status = cycle(['PUBG','VALORANT','MINECRAFT','PACMAN','FORTNITE'])
 async def change_status():
     await client.change_presence(activity=discord.Game(next(status)))
 
+@client.command()
+async def clear(ctx,n=1):
+    await ctx.channel.purge(limit=n)
 
 @client.event
 async def on_ready():
