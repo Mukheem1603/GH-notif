@@ -71,8 +71,35 @@ async def followers():
                     await followers()
     
     await followers()
-    
-client.loop.create_task(followers())
+
+async def fc():
+    await client.wait_until_ready()
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f"https://api.github.com/users/Mukheem1603/followers") as r1:
+            if r1.status == 200:
+                resp1 = await r1.json()
+                oldcount = len(resp1)
+                oldcount = int(oldcount)
+                newcount = oldcount
+        while newcount == oldcount:
+            async with session.get(f"https://api.github.com/users/Mukheem1603/followers") as r2:
+                if r2.status == 200:
+                    resp2 = await r2.json()
+                    newcount = len(resp2)
+                    newcount = int(newcount)
+        if newcount > oldcount :
+            channel = client.get_channel(737208902961201174)
+            nfollower = resp2[newcount-1]['login']
+            await channel.send(f"Boss , your following count has been increased.\n{nfollower} started following you.\nOld followers count={oldcount}\nNew followers count={newcount}")
+            await followers()       
+        elif oldcount > newcount :
+            channel = client.get_channel(737208902961201174)
+            ofollower = resp1[oldcount-1]['login']
+            await channel.send(f"Boss , your following count has been decreased.\n{ofollower} unfollowed you.\nOld followers count={oldcount}\nNew followers count={newcount}")
+            await followers()
+        
+
+client.loop.create_task(fc())
 
 client.run(os.environ['TOKEN'])
 
