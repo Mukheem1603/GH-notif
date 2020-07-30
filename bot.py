@@ -99,7 +99,7 @@ async def fc():
             await followers()
         
 
-client.loop.create_task(fc())
+client.loop.create_task(followers())
 
 client.run(os.environ['TOKEN'])
 
