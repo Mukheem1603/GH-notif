@@ -10,7 +10,7 @@ from itertools import cycle
 client = commands.Bot(command_prefix='$')
 status = cycle(['PUBG','VALORANT','MINECRAFT','PACMAN','FORTNITE'])
 
-@tasks.loop(seconds=10)
+@tasks.loop(seconds=30)
 async def change_status():
     await client.change_presence(activity=discord.Game(next(status)))
 
